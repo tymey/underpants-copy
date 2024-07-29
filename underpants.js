@@ -159,6 +159,16 @@ _.first = function(arr, num) {
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
+_.last = function(arr, num) {
+
+};
 
 /** _.indexOf
 * Arguments:
