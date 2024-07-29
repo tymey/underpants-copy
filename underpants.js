@@ -17,10 +17,21 @@ var _ = {};
 * Objectives:
 *   1) Returns <value> unchanged
 * Examples:
-*   _.identity(5) === 5
-*   _.identity({a: "b"}) === {a: "b"}
+*   _.identity(5) ==> 5
+*   _.identity({a: "b"}) ==> {a: "b"}
 */
 
+/**
+ * I: The function receives a value.
+ * O: The function returns the input value unchanged.
+ * C: N/A
+ * E: N/A
+ */
+
+_.identity = function(value) {
+    // Return value unchanged
+    return value;
+};
 
 /** _.typeOf
 * Arguments:
@@ -42,6 +53,30 @@ var _ = {};
 * _.typeOf([1,2,3]) -> "array"
 */
 
+/**
+ * I: The function receives a value.
+ * O: The function returns the input value's data type as a string.
+ * C: N/A
+ * E: N/A
+ */
+
+_.typeOf = function(value) {
+    // Must check for an array first since the unary operator typeof returns 'object' for Arrays
+    // Check if value is an array datatype
+    if (Array.isArray(value)) {
+        // If true, return 'array'
+        return 'array';
+    // Check else if value is the null datatype since typeof returns 'object' for the null data type
+    // Check if value is strictly equal to null
+    } else if (value === null) {
+        // If true, return 'null'
+        return 'null';
+    // Now the unary typeof operator will properly yield the correct string for each data type
+    // Else, return typeof value
+    } else {
+        return typeof value;
+    }
+};
 
 /** _.first
 * Arguments:
@@ -61,6 +96,50 @@ var _ = {};
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
+/**
+ * I: The function receives as array and a number.
+ * O: The fucntion returns [] if the input array isn't an array. The function
+ *    returns the first element of the inupt array if the input number isn't given
+ *    or isn't a numbers. Otherwise, the function returns the first input number 
+ *    items of the input array.
+ * C: N/A
+ * E: What if the input number is negative? 
+ *      - Return [] since a negative number is less than 1.
+ *    What if the input number is greater than the input array's length?
+ *      - Return the entire array since the number of elements is less than the input number.
+ */
+
+_.first = function(arr, num) {
+    // Initialize output variable with an empty array
+    let output = [];
+    /* Check if any of the following are true: 
+        - Not an array (_.typeOf(arr) !== 'array')
+        - num is less than 1 (num < 1) AND is an array (_.typeOf(arr) === 'array') */
+    if (_.typeOf(arr) !== 'array' || (_.typeOf(arr) === 'array' && num < 1)) {
+        // If either are true, return output
+        return output;
+    /* Check else if any of the following is true: 
+        - num === 1 
+        - num === undefined */
+    } else if (num === 1 || num === undefined) {
+        // If true, return the first element of arr
+        return arr[0];
+    // Check else if num > arr.length (num greater than length edge case)
+    } else if (num > arr.length) {
+        // If true, return the input array
+        return arr;
+    // Else, build output array with th first num elements of arr
+    } else {
+        // Iterate through the first num elements of arr
+        // Declare for loop using i; Start: 0; Stop: num; Increment by 1 each loop
+        for (let i = 0; i < num; i++) {
+            // Push arr[i] into output array to build out the first num elements
+            output.push(arr[i]);
+        }
+        // Once loop is done, return the output array
+        return output;
+    }
+};
 
 /** _.last
 * Arguments:
@@ -158,6 +237,30 @@ var _ = {};
 *   use _.each in your implementation
 */
 
+/**
+ * I: The function receives an array and a function that passes the arguments: the element
+ *    in the input array, its index, and the input array itself.
+ * O: The function returns a new array of elements for which the calling input function returned true.
+ * C: N/A
+ * E: N/A
+ */
+
+_.filter = function(array, func) {
+    // Initialize ouput variable with an empty array
+    let output = [];
+    // Loop through array
+    // Declare for loop using i; Start: 0; Stop: array.length; Increment by 1 each loop
+    for (let i = 0; i < array.length; i++) {
+        // Check if the input function func returns true after passing array[i] through it
+        if (func(array[i], i, array)) {
+            // If true, push array[i] into output array
+            output.push(array[i]);
+        }
+    }
+    // After the calling function func has been invoked with each element of array,
+    // return the output array
+    return output;
+};
 
 /** _.reject
 * Arguments:
