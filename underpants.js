@@ -284,6 +284,16 @@ _.contains = function(arr, val) {
 *      -> should log "a" "b" "c" to the console
 */
 
+/**
+ * I: The function receives a collection and a function.
+ * O: 
+ * C: 
+ * E: 
+ */
+
+_.each = function(col, func) {
+
+};
 
 /** _.unique
 * Arguments:
