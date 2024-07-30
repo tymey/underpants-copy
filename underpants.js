@@ -160,14 +160,36 @@ _.first = function(arr, num) {
 */
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives as array and a number.
+ * O: The fucntion returns [] if the input array isn't an array. The function
+ *    returns the first element of the inupt array if the input number isn't given
+ *    or isn't a numbers. Otherwise, the function returns the last input number 
+ *    items of the input array.
+ * C: N/A
+ * E: What if the input number is negative? 
+ *      - Return [] since a negative number is less than 1.
+ *    What if the input number is greater than the input array's length?
+ *      - Return the entire array since the number of elements is less than the input number.
  */
 
 _.last = function(arr, num) {
-
+    /* Check if any of the following are true: 
+        - Not an array (_.typeOf(arr) !== 'array')
+        - num is less than 1 (num < 1) AND is an array (_.typeOf(arr) === 'array') */
+    if (_.typeOf(arr) !== 'array' || (_.typeOf(arr) === 'array' && num < 1)) {
+        // If either are true, return output
+        return [];
+    } else if (num === 1 || num === undefined || _.typeOf(num) !== 'number') {
+        // If true, return the last element of arr
+        return arr[arr.length - 1];
+    // Check else if num > arr.length (num greater than length edge case)
+    } else if (num > arr.length) {
+        // If true, return the input array
+        return arr;
+    // Else, return a slice of arr starting with num - 1 (the index of the num element)
+    } else {
+        return arr.slice(-1 * num); 
+    }
 };
 
 /** _.indexOf
@@ -186,6 +208,16 @@ _.last = function(arr, num) {
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
+_.indexOf = function(arr, val) {
+
+};
 
 /** _.contains
 * Arguments:
