@@ -209,14 +209,27 @@ _.last = function(arr, num) {
 */
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array and a value.
+ * O: The function returns the index of <array> that is the first occuance of <value>.
+ * C: Do not use the native .indexOf() function.
+ * E: What if <array> has multiple occurances of <value>?
+ *      - The function should only return the lower numbered index.
+ *    What if <value> isn't in <array>?
+ *      - Return -1.
  */
 
 _.indexOf = function(arr, val) {
-
+    // Iterate through arr starting at index-0
+    // Declare for loop using i; Start: 0; Stop: arr.length; Increment by 1 each loop
+    for (let i = 0; i < arr.length; i++) {
+        // Check if arr[i] is strictly equal to val
+        if (arr[i] === val) {
+            // Return i
+            return i;
+        }
+    }
+    // If no match is found, return -1
+    return -1;
 };
 
 /** _.contains
