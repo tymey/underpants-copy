@@ -247,6 +247,26 @@ _.indexOf = function(arr, val) {
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 
+/**
+ * I: The function receives an array and a value.
+ * O: The function returns true if <array> contains <value>; otherwise, return false.
+ * C: Must use the ternary operator.
+ * E: What if no <value> is given?
+ */
+
+_.contains = function(arr, val) {
+    // Iterate through arr
+    // Declare for loop using i; Start: 0; Stop: arr.length; Increment by 1 each loop
+    for (let i = 0; i < arr.length; i++) {
+        // Check if arr[i] is strictly equal to val
+        if (arr[i] === val) {
+            // If true, return true
+            return true;
+        }
+    }
+    // If there is match after loop, return false.
+    return false;
+};
 
 /** _.each
 * Arguments:
