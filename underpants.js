@@ -395,13 +395,29 @@ _.filter = function(array, func) {
 */
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array and a function.
+ * O: The function returns a new array of elements for which the calling <function>
+ *    returned false.
+ * C: N/A
+ * E: N/A
  */
 
-
+_.reject = function(array, func) {
+    // Initialize ouput variable with an empty array
+    let output = [];
+    // Loop through array
+    // Declare for loop using i; Start: 0; Stop: array.length; Increment by 1 each loop
+    for (let i = 0; i < array.length; i++) {
+        // Check if the input function func returns false after passing array[i] through it
+        if (!func(array[i], i, array)) {
+            // If true, push array[i] into output array
+            output.push(array[i]);
+        }
+    }
+    // After the calling function func has been invoked with each element of array,
+    // return the output array
+    return output;
+};
 
 /** _.partition
 * Arguments:
