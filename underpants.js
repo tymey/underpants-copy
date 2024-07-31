@@ -255,18 +255,12 @@ _.indexOf = function(arr, val) {
  */
 
 _.contains = function(arr, val) {
-    // Iterate through arr
-    // Declare for loop using i; Start: 0; Stop: arr.length; Increment by 1 each loop
-    for (let i = 0; i < arr.length; i++) {
-        // Check if arr[i] is strictly equal to val
-        if (arr[i] === val) {
-            // If true, return true
-            return true;
-        }
-    }
-    // If there is match after loop, return false.
-    return false;
-};
+    // _.indexOf() yields an index value >= 0 if the value exists in the array
+    // Use a ternary operator: _.indexOf(arr, val) >= 0 ?
+        // Return true (if true) :
+        // Otherwise, return false (if false)
+    return _.indexOf(arr, val) >= 0 ? true : false;
+};  
 
 /** _.each
 * Arguments:
@@ -286,13 +280,30 @@ _.contains = function(arr, val) {
 
 /**
  * I: The function receives a collection and a function.
- * O: 
- * C: 
- * E: 
+ * O: The function returns the input collection after the input function
+ *    has been called on each element/property of the input collection.
+ * C: N/A
+ * E: N/A
  */
 
 _.each = function(col, func) {
-
+    // Check if col is an array data type
+    if (_.typeOf(col) === 'array') {
+        // If true, iterate through col's elements with a for loop
+        for (let i = 0; i < col.length; i++) {
+            // Invoke func with col[i], i, & col
+            func(col[i], i, col);
+        }
+    // Check else if col is an object datatype
+    } else if (_.typeOf(col) === 'object') {
+        // If true, iterate through col's properties with a for-in loop
+        for (var key in col) {
+            // Invoke func with col[key], key, col
+            func(col[key], key, col);
+        }
+    }
+    // Return col
+    return col;
 };
 
 /** _.unique
@@ -305,6 +316,28 @@ _.each = function(col, func) {
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
+/**
+ * I: The function receives an array.
+ * O: The function returns a new array of all elements from <array> with duplicates removed.
+ * C: Must use _.indexOf() from above
+ * E: N/A
+ */
+
+_.unique = function(arr) {
+    // Initialize output variable with a empty array
+    let output = [];
+    // Iterate through arr using a for loop
+    for (let i = 0; i < arr.length; i++) {
+        // _.indexOf(array, value) yields the first position of a <value> in an <array)
+        // Check if _.indexOf(arr, arr[i]) === i (Is the value in the first possible position?)
+        if (_.indexOf(arr, arr[i]) === i) {
+            // If true, push arr[i] into output
+            output.push(arr[i]);
+        }
+    }
+    // After iterating through arr, return output
+    return output;
+}
 
 /** _.filter
 * Arguments:
@@ -347,6 +380,7 @@ _.filter = function(array, func) {
     return output;
 };
 
+
 /** _.reject
 * Arguments:
 *   1) An array
@@ -359,6 +393,14 @@ _.filter = function(array, func) {
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 
 
 /** _.partition
@@ -380,6 +422,14 @@ _.filter = function(array, func) {
 }
 */
 
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
+
 
 /** _.map
 * Arguments:
@@ -397,6 +447,14 @@ _.filter = function(array, func) {
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
+
 
 /** _.pluck
 * Arguments:
@@ -408,6 +466,14 @@ _.filter = function(array, func) {
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 
 
 /** _.every
@@ -431,6 +497,14 @@ _.filter = function(array, func) {
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
+
 
 /** _.some
 * Arguments:
@@ -453,6 +527,14 @@ _.filter = function(array, func) {
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
+
 
 /** _.reduce
 * Arguments:
@@ -473,6 +555,14 @@ _.filter = function(array, func) {
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
+
 
 /** _.extend
 * Arguments:
@@ -488,6 +578,15 @@ _.filter = function(array, func) {
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
