@@ -620,14 +620,55 @@ _.every = (col, func) => {
 */
 
 /**
- * I: 
- * O: 
+ * I: The function receives a collection and a function.
+ * O: The function returns true if the input function returns a truthy value after being invoked 
+ *    with AT LEAST ONE element/property of the input collection; otherwise, it returns false.
  * C: 
- * E: 
+ * E: What if <function> doesn't return a boolean?
+ *      - The conditional statement will only contain the <function> so it can still operate on whether
+ *        the value is truthy or falsey.
+ *    What if <function> is not given?
+ *      - Return true if at least one element is truthy; otherwise, return false.
  */
 
-_.some = () => {
-    
+_.some = (col, func) => {
+    // Check if func is undefined AND col is an Array
+    if (func === undefined && _.typeOf(col) === 'array') {
+        // Iterate through col using for loop
+        for (let i = 0; i < col.length; i++) {
+            // Check if col[i] is truthy
+            if (col[i]) {
+                // If truthy, return true
+                return true;
+            }
+        }
+        // After loop completes and doesn't return true, return false
+        return false;
+    // Check else if col is an Array
+    } else if (_.typeOf(col) === 'array') {
+        // Iterate through col using a for loop
+        for (let i = 0; i < col.length; i++) {
+            // Check if invoking func with col[i], i, & col returns a truthy value
+            if (func(col[i], i, col)) {
+                // If truthy, return true
+                return true;
+            }
+        }
+        // Return false if none are truthy
+        return false;
+    // Check else if col is an Object
+    } else if (_.typeOf(col) === 'object') {
+        // Iterate through col using a for in loop
+        for (let key in col) {
+            // Check if invoking func with col[key], key, & col returns a truthy value
+            if (func(col[key], key, col)) {
+                // If truthy, return true
+                return true;
+            }
+        }
+        // Return false if none are truthy
+        return false;
+    }
 };
 
 /** _.reduce
@@ -650,13 +691,40 @@ _.some = () => {
 */
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array, a function, and a seed (number).
+ * O: The function returns the value from a number of iterations of invoking the <function> with 
+ *    the previous result (previous <function> call), element of <array>, and index of <array>. 
+ *    One the very first iteration, use <seed> as the previous result.
+ * C: N/A
+ * E: What if <seed> is not given?
+ *      - Use the first element of the <array> as <seed> and continue to the next element.
  */
 
-
+_.reduce = (arr, func, seed) => {
+    // Check if seed is undefined
+    if (seed === undefined) {
+        // Initialize output variable with arr[0]
+        let output = arr[0];
+        // Iterate through arr using a for loop; Start: 1
+        for (let i = 1; i < arr.length; i++) {
+            // Reassign output with the return value from invoking func with output, arr[i], i
+            output = func(output, arr[i], i);
+        }
+        // After loop, return output
+        return output;
+    // Else, use the following code if you have a seed
+    } else {
+        // Initialize output variable with seed
+        let output = seed;
+        // Iterate through arr using a for loop
+        for (let i = 0; i < arr.length; i++) {
+            // Reassign output with the return value from invoking func with output, arr[i], i
+            output = func(output, arr[i], i);
+        }
+        // After loop, return output
+        return output;
+    }
+};
 
 /** _.extend
 * Arguments:
@@ -680,7 +748,9 @@ _.some = () => {
  * E: 
  */
 
-
+_.extend = (target, ...objs) => {
+    
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
