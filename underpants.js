@@ -512,13 +512,18 @@ _.map = function(col, func) {
 */
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array of objects and a property.
+ * O: The function returns an array containing the value of <property> for every element in <array>.
+ * C: Must use _.map() in your implementation.
+ * E: N/A
  */
 
-
+_.pluck = function(arr, prop) {
+    /* Return the array returned from _.map being invoked with arr & a function expression 
+       that receives an obj(the current element in the for loop on arr) & returns the value 
+       from the obj's given prop */
+    return _.map(arr, obj => obj[prop]);
+};
 
 /** _.every
 * Arguments:
@@ -542,13 +547,56 @@ _.map = function(col, func) {
 */
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a collection and a function.
+ * O: The function returns true if the input function returns a truthy value after being invoked 
+ *    with EVERY element/property of the input collection; otherwise, it returns false.
+ * C: N/A
+ * E: What if <function> doesn't return a boolean?
+ *      - The conditional statement will only contain the <function> so it can still operate on whether
+ *        the value is truthy or falsey.
+ *    What if <function> is not given?
+ *      - Return true if every element is truthy; otherwise, return false.
  */
 
-
+_.every = (col, func) => {
+    // Check if func is undefined AND col is an Array
+    if (func === undefined && _.typeOf(col) === 'array') {
+        // Iterate through col using for loop
+        for (let i = 0; i < col.length; i++) {
+            // Check if col[i] is falsey
+            if (!col[i]) {
+                // If falsey, return false
+                return false;
+            }
+        }
+        // After loop completes and doesn't return false, return true
+        return true;
+    // Check else if col is an Array
+    } else if (_.typeOf(col) === 'array') {
+        // Iterate through col using a for loop
+        for (let i = 0; i < col.length; i++) {
+            // Check if invoking func with col[i], i, & col returns a falsey value
+            if (!func(col[i], i, col)) {
+                // If falsey, return false
+                return false;
+            }
+        }
+        // Return true if none are falsey
+        return true;
+    // Check else if col is an Object
+    } else if (_.typeOf(col) === 'object') {
+        // Iterate through col using a for in loop
+        for (let key in col) {
+            // Check if invoking func with col[key], key, & col returns a falsey value
+            if (!func(col[key], key, col)) {
+                // If falsey, return false
+                return false;
+            }
+        }
+        // Return true if none are falsey
+        return true;
+    }
+};
 
 /** _.some
 * Arguments:
@@ -578,7 +626,9 @@ _.map = function(col, func) {
  * E: 
  */
 
-
+_.some = () => {
+    
+};
 
 /** _.reduce
 * Arguments:
