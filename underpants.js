@@ -439,13 +439,20 @@ _.reject = function(array, func) {
 */
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array and a function.
+ * O: The funciton returns an array that is made of 2 sub arrays:
+ *      0) An array that contains all the values for which <function> returned something truthy
+ *      1) An array that contains all the values for which <function> returned something falsy
+ * C: N/A
+ * E: N/A
  */
 
-
+_.partition = function (arr, func) {
+    // _.filter() returns an array of all elements that returned true after passing through <function>
+    // _.reject() returns an array of all elements that returned false after passing through <function>
+    // Return an array containing the array from using _.filter(arr, func) and then using _.reject(arr, func)
+    return [_.filter(arr, func), _.reject(arr, func)];
+};
 
 /** _.map
 * Arguments:
@@ -464,13 +471,34 @@ _.reject = function(array, func) {
 */
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a collection and a function.
+ * O: The function returns a new array containing the returned values after invoking
+ *    the input function with each element/property of the input collection.
+ * C: N/A
+ * E: N/A
  */
 
-
+_.map = function(col, func) {
+    // Initialize output variable with an empty array
+    let output = [];
+    // Check if col is an array data type
+    if (_.typeOf(col) === 'array') {
+        // Iterate through col using a for loop
+        for (let i = 0; i < col.length; i++) {
+            // Push the returned value from invoking func with col[i], i, & col into the output array
+            output.push(func(col[i], i, col));
+        }
+    // Check else if col is an object data type
+    } else if (_.typeOf(col) === 'object') {
+        // Iterate through col using a for-in loop
+        for (let key in col) {
+            // Push the returned value from invoking func with col[key], key, & col into the output array
+            output.push(func(col[key], key, col));
+        }
+    }
+    // Return output
+    return output;
+};
 
 /** _.pluck
 * Arguments:
