@@ -742,8 +742,10 @@ _.reduce = (arr, func, seed) => {
 */
 
 /**
- * I: 
- * O: 
+ * I: The function receives a target object and any number of additional objects.
+ * O: The function returns the input target object updated the with properties of 
+ *    the additional input objects. Update properties if they already existing in
+ *    the input target object.
  * C: 
  * E: 
  */
