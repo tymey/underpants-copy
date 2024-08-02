@@ -755,7 +755,7 @@ _.extend = (target, ...objs) => {
     let output = target;
     // Iterate through ...objs array with for-of loop
     for (let object of objs) {
-        // Iterate through i (object) with for for-in loop
+        // Iterate through object with for for-in loop
         for (let key in object) {
             // Assign output[key] to i[key]
             output[key] = object[key];
