@@ -751,7 +751,18 @@ _.reduce = (arr, func, seed) => {
  */
 
 _.extend = (target, ...objs) => {
-    
+    // Initialize output variable with target
+    let output = target;
+    // Iterate through ...objs array with for-of loop
+    for (let object of objs) {
+        // Iterate through i (object) with for for-in loop
+        for (let key in object) {
+            // Assign output[key] to i[key]
+            output[key] = object[key];
+        }
+    }
+    // Return output
+    return output;
 };
 
 //////////////////////////////////////////////////////////////////////
